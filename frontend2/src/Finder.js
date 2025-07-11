@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
+import { API_BASE } from "./api";  // ← our new helper
 
 const STEPS = [
   { key: "vehicle_type", label: "Vehicle Category" },
@@ -19,7 +20,7 @@ export default function Finder() {
   const navigate = useNavigate();
 
   const fetchOptions = async (stepKey) => {
-    const res = await fetch(`http://127.0.0.1:8000/options/${stepKey}`, {
+    const res = await fetch(`${API_BASE}/options/${stepKey}`, {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(selections),
@@ -79,7 +80,7 @@ export default function Finder() {
       {Object.keys(selections).length === STEPS.length && (
         <button
           onClick={async () => {
-            const res = await fetch("http://127.0.0.1:8000/recommendation", {
+            const res = await fetch(`${API_BASE}/recommendation`, {
               method:  "POST",
               headers: { "Content-Type": "application/json" },
               body:    JSON.stringify(selections),

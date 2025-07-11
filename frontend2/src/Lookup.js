@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
+import { API_BASE } from "./api";  // ← use our helper
 
 export default function Lookup() {
   const [vin, setVin] = useState("");
@@ -9,7 +10,7 @@ export default function Lookup() {
   const navigate = useNavigate();
 
   const handleLookup = async () => {
-    const res = await fetch("http://127.0.0.1:8000/vin-info", {
+    const res = await fetch(`${API_BASE}/vin-info`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ vin }),
@@ -20,7 +21,7 @@ export default function Lookup() {
 
   const handleRecommend = async () => {
     // fetch your two battery recommendations
-    const res = await fetch("http://127.0.0.1:8000/vin-recommendation", {
+    const res = await fetch(`${API_BASE}/vin-recommendation`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ vin }),
