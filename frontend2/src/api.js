@@ -1,2 +1,2 @@
 // src/api.js
-export const API_BASE = process.env.REACT_APP_API_BASE;
+export const API_BASE = "http://34.226.150.227";
